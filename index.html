@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en-NL">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="theme-color" content="#ffdd00" />
+  <meta name="description" content="“Please move aside” is an interactive gallery that shows literal obstacles in daily life." />
+  <link rel="shortcut icon" href="https://chuniversiteit.nl/favicon.ico" type="image/x-icon" />
+
+  <meta property="og:title" content="Please move aside" />
+  <meta property="og:type" content="website" />
+  <meta property="og:description" content="“Please move aside” is an interactive gallery that shows literal obstacles in daily life.">
+  <meta property="og:image" content="https://chuniversiteit.nl/images/content/2022/blocking-the-vending-machine.png" />
+  <meta property="og:url" content="https://please-move-aside.chuniversiteit.nl" />
+  <meta name="twitter:card" content="summary_large_image">
+
+  <title>Please move aside</title>
+  <style>
+    * {
+      margin:  0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #fd0;
+      font-family:      sans-serif;
+      font-size:        1.4rem;
+      text-align:       center;
+      user-select:      none;
+    }
+
+    h1 {
+      border:         .3rem solid #d00;
+      border-radius:  .5rem;
+      color:          #d00;
+      display:        inline-block;
+      font-family:    monospace;
+      font-size:      2rem;
+      margin:         1rem 0;
+      padding:        .2rem .5rem;
+      text-transform: uppercase;
+      transform:      rotate(-1deg);
+    }
+
+    .carousel {
+      background-color: #fdfdfd;
+      border:           1rem solid #fdfdfd;
+      border-top:       none; /* Make sure entire frame is visible after scrolling to anchor */
+      box-shadow:       .1rem .1rem .5rem #333;
+      margin:           1rem auto 1.5rem;
+      position:         relative;
+      width:            20rem;
+    }
+
+    .backgrounds,
+    .obstacles {
+      display:          flex;
+      list-style:       none;
+      overflow-x:       scroll;
+      scroll-behavior:  smooth;
+      scroll-snap-type: x mandatory;
+      scrollbar-width:  none;
+      user-select:      none;
+      width:            20rem;
+    }
+
+    .obstacles {
+      position: absolute;
+      top:      0;
+    }
+
+    .backgrounds::-webkit-scrollbar,
+    .obstacles::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel li {
+      padding-top:       1rem; /* Make sure entire frame is visible after scrolling to anchor */
+      scroll-snap-align: start;
+    }
+
+    .carousel img {
+      aspect-ratio: 1;
+      width:        20rem;
+    }
+
+    h2 {
+      font-size:   1.4rem;
+      font-weight: normal;
+      margin:      1rem 0;
+    }
+
+    nav li {
+      display:       inline-block;
+      margin-bottom: 1rem;
+    }
+
+    .button {
+      background-color: #d00;
+      border:           0;
+      border-radius:    .8rem;
+      box-shadow:       0 .2rem #a00;
+      color:            #fff;
+      display:          inline-block;
+      font-size:        inherit;
+      padding:          .5rem 1rem;
+      text-decoration:  none;
+    }
+
+    .button:hover {
+      background-color: #f55;
+    }
+
+    .button:active {
+      background-color: #a00;
+      box-shadow:       none;
+      position:         relative;
+      top:              .2rem;
+    }
+
+    .fourth-wall {
+      background-color: transparent;
+      height:           100%;
+      position:         absolute;
+      top:              0;
+      width:            100%;
+    }
+
+    .share {
+      display:    none;
+      margin-top: 2rem;
+    }
+
+    footer {
+      font-size:  1.1rem;
+      margin:     4rem auto 1rem;
+      padding:    0 1rem;
+    }
+
+    footer a {
+      color:  #d00;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .backgrounds,
+      .obstacles {
+        scroll-behavior: auto;
+      }
+
+      .button:hover,
+      .button:active {
+        background-color: #d00;
+        box-shadow:       0 .2rem #a00;
+        top:              0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Please move aside</h1>
+  </header>
+
+  <main id="app">
+    <div class="carousel">
+      <ol id="backgrounds" class="backgrounds">
+        <li id="bg1"><img src="backgrounds/1.png" /></li>
+        <li id="bg2"><img src="backgrounds/2.png" /></li>
+        <li id="bg3"><img src="backgrounds/3.png" /></li>
+        <li id="bg4"><img src="backgrounds/4.png" /></li>
+        <li id="bg5"><img src="backgrounds/5.png" /></li>
+        <li id="bg6"><img src="backgrounds/6.png" /></li>
+        <li id="bg7"><img src="backgrounds/7.png" /></li>
+      </ol>
+
+      <ol id="obstacles" class="obstacles">
+        <li id="fg1"><img src="obstacles/1.png" /></li>
+        <li id="fg2"><img src="obstacles/2.png" /></li>
+        <li id="fg3"><img src="obstacles/3.png" /></li>
+        <li id="fg4"><img src="obstacles/4.png" /></li>
+        <li id="fg5"><img src="obstacles/5.png" /></li>
+        <li id="fg6"><img src="obstacles/6.png" /></li>
+        <li id="fg7"><img src="obstacles/7.png" /></li>
+        <li id="fg8"><img src="obstacles/8.png" /></li>
+        <li id="fg9"><img src="obstacles/9.png" /></li>
+        <li id="fg10"><img src="obstacles/10.png" /></li>
+      </ol>
+
+      <div class="fourth-wall" oncontextmenu="return false"></div>
+
+    </div>
+
+    <h2>Choose your obstacle</h2>
+    <nav>
+      <ul>
+        <li><a href="#fg1" class="selector button">1</a></li>
+        <li><a href="#fg2" class="selector button">2</a></li>
+        <li><a href="#fg3" class="selector button">3</a></li>
+        <li><a href="#fg4" class="selector button">4</a></li>
+        <li><a href="#fg5" class="selector button">5</a></li>
+        <li><a href="#fg6" class="selector button">6</a></li>
+        <li><a href="#fg7" class="selector button">7</a></li>
+        <li><a href="#fg8" class="selector button">8</a></li>
+        <li><a href="#fg9" class="selector button">9</a></li>
+        <li><a href="#fg10" class="selector button">10</a></li>
+      </ul>
+    </nav>
+
+    <h2>and a location</h2>
+    <nav>
+      <ul>
+        <li><a href="#bg1" class="selector button">1</a></li>
+        <li><a href="#bg2" class="selector button">2</a></li>
+        <li><a href="#bg3" class="selector button">3</a></li>
+        <li><a href="#bg4" class="selector button">4</a></li>
+        <li><a href="#bg5" class="selector button">5</a></li>
+        <li><a href="#bg6" class="selector button">6</a></li>
+        <li><a href="#bg7" class="selector button">7</a></li>
+      </ul>
+    </nav>
+
+    <div id="share" class="share">
+      <button class="button">Share your pet peeve!</button>
+    </div>
+  </main>
+
+  <footer>
+    Created out of sheer frustration by <a href="https://chuniversiteit.nl">Chuniversiteit</a> 😡
+  </footer>
+
+  <script>
+    var currentForeground = 'fg1';
+    var currentBackground = 'bg1';
+
+    async function initialisePicture() {
+      window.location.hash.substring(1)
+        .split('+')
+        .filter(a => a)
+        .forEach(activateSelection);
+    }
+
+    function activateSelection(id) {
+      if (id.startsWith('fg')) {
+        currentForeground = id;
+      } else {
+        currentBackground = id;
+      }
+
+      const container = id.startsWith('fg')
+        ? document.getElementById('obstacles')
+        : document.getElementById('backgrounds');
+
+      const offset = parseInt(id.substring(2)) - 1;
+      container.scrollTo(document.getElementById(id)?.getBoundingClientRect().width * offset, 0);
+    }
+
+    function scrollTo(event) {
+      event.preventDefault();
+      const id = event.target.href.split('#').pop();
+      activateSelection(id);
+      history.pushState(null, null, `#${currentForeground}+${currentBackground}`);
+
+      if (navigator.share) {
+        document.getElementById('share').style.display = 'block';
+      }
+    }
+
+    function share(event) {
+      event.preventDefault();
+      navigator.share({
+        title: 'Please move aside',
+        text: 'Check out my biggest pet peeve! #PleaseMoveAside',
+        url: window.location,
+      });
+    }
+
+    window.onload = (event) => {
+      initialisePicture();
+
+      for (const a of document.getElementsByClassName('selector')) {
+        a.addEventListener('click', scrollTo);
+      }
+
+      document.getElementById('share').addEventListener('click', share);
+    };
+  </script>
+  <script data-goatcounter="https://please-move-aside.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
