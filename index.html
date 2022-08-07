@@ -8,14 +8,14 @@
   <meta name="description" content="“Please move aside” is an interactive gallery that shows literal obstacles in daily life." />
   <link rel="shortcut icon" href="https://chuniversiteit.nl/favicon.ico" type="image/x-icon" />
 
-  <meta property="og:title" content="Please move aside" />
+  <meta property="og:title" content="Please move aside – A passive-aggressive obstacle simulator built using HTML and CSS" />
   <meta property="og:type" content="website" />
   <meta property="og:description" content="“Please move aside” is an interactive gallery that shows literal obstacles in daily life.">
   <meta property="og:image" content="https://chuniversiteit.nl/images/content/2022/blocking-the-vending-machine.png" />
   <meta property="og:url" content="https://please-move-aside.chuniversiteit.nl" />
   <meta name="twitter:card" content="summary_large_image">
 
-  <title>Please move aside</title>
+  <title>Please move aside – A passive-aggressive obstacle simulator built using HTML and CSS</title>
   <style>
     * {
       margin:  0;
@@ -25,9 +25,11 @@
     body {
       background-color: #fd0;
       font-family:      sans-serif;
-      font-size:        1.4rem;
+      font-size:        1.3rem;
       text-align:       center;
       user-select:      none;
+
+      -webkit-user-select: none;
     }
 
     h1 {
@@ -37,13 +39,13 @@
       display:        inline-block;
       font-family:    monospace;
       font-size:      2rem;
-      margin:         1rem 0;
+      margin:         2rem 0;
       padding:        .2rem .5rem;
       text-transform: uppercase;
       transform:      rotate(-1deg);
     }
 
-    .carousel {
+    .picture {
       background-color: #fdfdfd;
       border:           1rem solid #fdfdfd;
       border-top:       none; /* Make sure entire frame is visible after scrolling to anchor */
@@ -75,20 +77,25 @@
       display: none;
     }
 
-    .carousel li {
+    .picture li {
       padding-top:       1rem; /* Make sure entire frame is visible after scrolling to anchor */
       scroll-snap-align: start;
     }
 
-    .carousel img {
+    .picture img {
       aspect-ratio: 1;
       width:        20rem;
     }
 
     h2 {
-      font-size:   1.4rem;
+      font-size:   inherit;
       font-weight: normal;
       margin:      1rem 0;
+    }
+
+    nav {
+      margin:    0 auto;
+      max-width: 40rem;
     }
 
     nav li {
@@ -102,6 +109,7 @@
       border-radius:    .8rem;
       box-shadow:       0 .2rem #a00;
       color:            #fff;
+      cursor:           pointer;
       display:          inline-block;
       font-size:        inherit;
       padding:          .5rem 1rem;
@@ -127,7 +135,7 @@
       width:            100%;
     }
 
-    .share {
+    .hidden {
       display:    none;
       margin-top: 2rem;
     }
@@ -160,10 +168,11 @@
 <body>
   <header>
     <h1>Please move aside</h1>
+    <h2>Nothing says “You’re in my way” like…</h2>
   </header>
 
   <main id="app">
-    <div class="carousel">
+    <div id="picture" class="picture">
       <ol id="backgrounds" class="backgrounds">
         <li id="bg1"><img src="backgrounds/1.png" /></li>
         <li id="bg2"><img src="backgrounds/2.png" /></li>
@@ -172,6 +181,10 @@
         <li id="bg5"><img src="backgrounds/5.png" /></li>
         <li id="bg6"><img src="backgrounds/6.png" /></li>
         <li id="bg7"><img src="backgrounds/7.png" /></li>
+        <li id="bg8"><img src="backgrounds/8.png" /></li>
+        <li id="bg9"><img src="backgrounds/9.png" /></li>
+        <li id="bg10"><img src="backgrounds/10.png" /></li>
+        <li id="bg11"><img src="backgrounds/11.png" /></li>
       </ol>
 
       <ol id="obstacles" class="obstacles">
@@ -185,13 +198,36 @@
         <li id="fg8"><img src="obstacles/8.png" /></li>
         <li id="fg9"><img src="obstacles/9.png" /></li>
         <li id="fg10"><img src="obstacles/10.png" /></li>
+        <li id="fg11"><img src="obstacles/11.png" /></li>
+        <li id="fg12"><img src="obstacles/12.png" /></li>
+        <li id="fg13"><img src="obstacles/13.png" /></li>
+        <li id="fg14"><img src="obstacles/14.png" /></li>
+        <li id="fg15"><img src="obstacles/15.png" /></li>
+        <li id="fg16"><img src="obstacles/16.png" /></li>
       </ol>
 
       <div class="fourth-wall" oncontextmenu="return false"></div>
 
     </div>
 
-    <h2>Choose your obstacle</h2>
+    <h2>Where do you need to go?</h2>
+    <nav>
+      <ul>
+        <li><a href="#bg1" class="selector button">1</a></li>
+        <li><a href="#bg2" class="selector button">2</a></li>
+        <li><a href="#bg3" class="selector button">3</a></li>
+        <li><a href="#bg4" class="selector button">4</a></li>
+        <li><a href="#bg5" class="selector button">5</a></li>
+        <li><a href="#bg6" class="selector button">6</a></li>
+        <li><a href="#bg7" class="selector button">7</a></li>
+        <li><a href="#bg8" class="selector button">8</a></li>
+        <li><a href="#bg9" class="selector button">9</a></li>
+        <li><a href="#bg10" class="selector button">10</a></li>
+        <li><a href="#bg11" class="selector button">11</a></li>
+      </ul>
+    </nav>
+
+    <h2>Who or what is blocking you?</h2>
     <nav>
       <ul>
         <li><a href="#fg1" class="selector button">1</a></li>
@@ -204,29 +240,24 @@
         <li><a href="#fg8" class="selector button">8</a></li>
         <li><a href="#fg9" class="selector button">9</a></li>
         <li><a href="#fg10" class="selector button">10</a></li>
+        <li><a href="#fg11" class="selector button">11</a></li>
+        <li><a href="#fg12" class="selector button">12</a></li>
+        <li><a href="#fg13" class="selector button">13</a></li>
+        <li><a href="#fg14" class="selector button">14</a></li>
+        <li><a href="#fg15" class="selector button">15</a></li>
+        <li><a href="#fg16" class="selector button">16</a></li>
       </ul>
     </nav>
 
-    <h2>and a location</h2>
-    <nav>
-      <ul>
-        <li><a href="#bg1" class="selector button">1</a></li>
-        <li><a href="#bg2" class="selector button">2</a></li>
-        <li><a href="#bg3" class="selector button">3</a></li>
-        <li><a href="#bg4" class="selector button">4</a></li>
-        <li><a href="#bg5" class="selector button">5</a></li>
-        <li><a href="#bg6" class="selector button">6</a></li>
-        <li><a href="#bg7" class="selector button">7</a></li>
-      </ul>
-    </nav>
-
-    <div id="share" class="share">
+    <div id="share" class="hidden">
       <button class="button">Share your pet peeve!</button>
     </div>
   </main>
 
   <footer>
-    Created out of sheer frustration by <a href="https://chuniversiteit.nl">Chuniversiteit</a> 😡
+    Created out of sheer frustration by <a href="https://chuniversiteit.nl">Chuniversiteit</a>. 😡
+    <br />
+    <a href="https://github.com/chunfeilung/please-move-aside">Source on GitHub</a>
   </footer>
 
   <script>
